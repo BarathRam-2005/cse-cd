@@ -2546,6 +2546,217 @@ int main()
         </div>
     </div>
 
+    <div class="code-card">
+        <div class="card-header">
+            <h2>Optimization Techniques.txt</h2>
+            <button class="btn-copy" id="btn-OptimizationTechniquestxt" onclick="copyToClipboard('OptimizationTechniquestxt', 'btn-OptimizationTechniquestxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="OptimizationTechniquestxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;ctype.h&gt;
+
+int isNumber(char s[]) {
+    int i;
+    for(i = 0; s[i] != &#x27;\0&#x27;; i++) {
+        if(!isdigit(s[i]))
+            return 0;
+    }
+    return 1;
+}
+
+int main() {
+    int n, i, j;
+    char left[10][10], right[10][20];
+
+    printf(&quot;Enter number of statements: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for(i = 0; i &lt; n; i++) {
+        printf(&quot;Enter LHS: &quot;);
+        scanf(&quot;%s&quot;, left[i]);
+        printf(&quot;Enter RHS: &quot;);
+        scanf(&quot;%s&quot;, right[i]);
+    }
+
+    // 🔹 Intermediate Code
+    printf(&quot;\nIntermediate Code:\n&quot;);
+    for(i = 0; i &lt; n; i++) {
+        printf(&quot;%s = %s\n&quot;, left[i], right[i]);
+    }
+
+    // 🔹 Constant Folding
+    printf(&quot;\nAfter Constant Folding:\n&quot;);
+    for(i = 0; i &lt; n; i++) {
+        char a[10], b[10], op;
+        int k = 0, m = 0, pos = -1;
+
+        // find operator position
+        for(j = 0; right[i][j] != &#x27;\0&#x27;; j++) {
+            if(right[i][j] == &#x27;+&#x27; || right[i][j] == &#x27;-&#x27; ||
+               right[i][j] == &#x27;*&#x27; || right[i][j] == &#x27;/&#x27;) {
+                op = right[i][j];
+                pos = j;
+                break;
+            }
+        }
+
+        if(pos != -1) {
+            // split operands
+            for(j = 0; j &lt; pos; j++) a[k++] = right[i][j];
+            a[k] = &#x27;\0&#x27;;
+
+            for(j = pos + 1; right[i][j] != &#x27;\0&#x27;; j++) b[m++] = right[i][j];
+            b[m] = &#x27;\0&#x27;;
+
+            if(isNumber(a) &amp;&amp; isNumber(b)) {
+                int x = atoi(a);
+                int y = atoi(b);
+                int res;
+
+                if(op == &#x27;+&#x27;) res = x + y;
+                else if(op == &#x27;-&#x27;) res = x - y;
+                else if(op == &#x27;*&#x27;) res = x * y;
+                else if(op == &#x27;/&#x27; &amp;&amp; y != 0) res = x / y;
+
+                sprintf(right[i], &quot;%d&quot;, res);
+            }
+        }
+
+        printf(&quot;%s = %s\n&quot;, left[i], right[i]);
+    }
+
+    // 🔹 Strength Reduction
+    printf(&quot;\nAfter Strength Reduction:\n&quot;);
+    for(i = 0; i &lt; n; i++) {
+        char a[10], b[10];
+        int k = 0, m = 0, pos = -1;
+
+        for(j = 0; right[i][j] != &#x27;\0&#x27;; j++) {
+            if(right[i][j] == &#x27;*&#x27;) {
+                pos = j;
+                break;
+            }
+        }
+
+        if(pos != -1) {
+            for(j = 0; j &lt; pos; j++) a[k++] = right[i][j];
+            a[k] = &#x27;\0&#x27;;
+
+            for(j = pos + 1; right[i][j] != &#x27;\0&#x27;; j++) b[m++] = right[i][j];
+            b[m] = &#x27;\0&#x27;;
+
+            if(strcmp(b, &quot;2&quot;) == 0) {
+                sprintf(right[i], &quot;%s+%s&quot;, a, a);
+            }
+        }
+
+        printf(&quot;%s = %s\n&quot;, left[i], right[i]);
+    }
+
+    // 🔹 Algebraic Transformation
+    printf(&quot;\nAfter Algebraic Transformation:\n&quot;);
+    for(i = 0; i &lt; n; i++) {
+        char a[10], b[10], op;
+        int k = 0, m = 0, pos = -1;
+
+        for(j = 0; right[i][j] != &#x27;\0&#x27;; j++) {
+            if(right[i][j] == &#x27;+&#x27; || right[i][j] == &#x27;*&#x27; ) {
+                op = right[i][j];
+                pos = j;
+                break;
+            }
+        }
+
+        if(pos != -1) {
+            for(j = 0; j &lt; pos; j++) a[k++] = right[i][j];
+            a[k] = &#x27;\0&#x27;;
+
+            for(j = pos + 1; right[i][j] != &#x27;\0&#x27;; j++) b[m++] = right[i][j];
+            b[m] = &#x27;\0&#x27;;
+
+            if(op == &#x27;+&#x27; &amp;&amp; strcmp(b, &quot;0&quot;) == 0)
+                strcpy(right[i], a);
+
+            else if(op == &#x27;*&#x27; &amp;&amp; strcmp(b, &quot;1&quot;) == 0)
+                strcpy(right[i], a);
+
+            else if(op == &#x27;*&#x27; &amp;&amp; strcmp(b, &quot;0&quot;) == 0)
+                strcpy(right[i], &quot;0&quot;);
+        }
+
+        printf(&quot;%s = %s\n&quot;, left[i], right[i]);
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>Conversion of Regular Expression to DFA.txt</h2>
+            <button class="btn-copy" id="btn-ConversionofRegularExpressiontoDFAtxt" onclick="copyToClipboard('ConversionofRegularExpressiontoDFAtxt', 'btn-ConversionofRegularExpressiontoDFAtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="ConversionofRegularExpressiontoDFAtxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+int from[50], to[50], top = 0, state = 1;
+char sym[50];
+void add(int a, char c, int b) {
+    from[top] = a;
+    sym[top] = c;
+    to[top] = b;
+    top++;
+}
+int main() {
+    char re[50];
+    int i;
+    printf(&quot;Enter Regular Expression:&quot;);
+    scanf(&quot;%s&quot;, re);
+
+    for (i = 0; i &lt; strlen(re); i++) {
+        if (isalnum(re[i])) {
+            if (re[i+1] == &#x27;*&#x27;) {
+                add(state, re[i], state);
+                add(state, &#x27;e&#x27;, state+1);
+                state++;
+                i++;
+            }
+            else {
+                add(state, re[i], state+1);
+                state++;
+            }
+        }
+        else if (re[i] == &#x27;|&#x27;) {
+            add(state, &#x27;e&#x27;, state+1);
+            state++;
+        }
+    }
+    printf(&quot;\nNo of edges are:%d\n&quot;, top);
+    printf(&quot;Transition function\n&quot;);
+    for (i = 0; i &lt; top; i++) {
+        printf(&quot;q[%d,%c]-&gt;%d\n&quot;, from[i], sym[i], to[i]);
+    }
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
 </div>
 
 <script>
