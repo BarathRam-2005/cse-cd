@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code Snippets</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --bg: #0d1117;
+        --card-bg: #161b22;
+        --border: #30363d;
+        --text: #c9d1d9;
+        --heading: #58a6ff;
+        --btn-bg: #21262d;
+        --btn-hover: #30363d;
+        --code-bg: #010409;
+        --success: #2ea043;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 40px 20px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: white;
+        font-weight: 600;
+        font-size: 2.5rem;
+    }
+
+    .code-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .card-header h2 {
+        font-size: 1.1rem;
+        color: var(--heading);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-header h2::before {
+        content: "📄";
+        font-size: 1.2rem;
+    }
+
+    .btn-copy {
+        background: var(--btn-bg);
+        color: var(--text);
+        border: 1px solid var(--border);
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .btn-copy:hover {
+        background: var(--btn-hover);
+        border-color: #8b949e;
+    }
+
+    .btn-copy.success {
+        color: var(--success);
+        border-color: var(--success);
+    }
+
+    .code-content {
+        padding: 20px;
+        background: var(--code-bg);
+        overflow-x: auto;
+    }
+
+    pre {
+        margin: 0;
+        tab-size: 4;
+    }
+
+    code {
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9rem;
+        color: #e6edf3;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CD Lab Codes</h1>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab1-tokenSeperation.txt</h2>
+            <button class="btn-copy" id="btn-lab1tokenSeperationtxt" onclick="copyToClipboard('lab1tokenSeperationtxt', 'btn-lab1tokenSeperationtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab1tokenSeperationtxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+int main() {
+    char s[100];
+    printf(&quot;Enter: &quot;);
+    fgets(s,sizeof(s),stdin);
+    int n=strlen(s);
+    const char *keywords[]={
+        &quot;int&quot;,&quot;float&quot;,&quot;char&quot;,&quot;double&quot;,&quot;long&quot;,&quot;short&quot;,&quot;signed&quot;,&quot;unsigned&quot;,
+        &quot;for&quot;,&quot;while&quot;,&quot;do&quot;,&quot;if&quot;,&quot;else&quot;,&quot;switch&quot;,&quot;case&quot;,&quot;default&quot;,&quot;break&quot;,
+        &quot;continue&quot;,&quot;return&quot;,&quot;void&quot;,&quot;static&quot;,&quot;struct&quot;,&quot;union&quot;,&quot;typedef&quot;,
+        &quot;const&quot;,&quot;goto&quot;,&quot;sizeof&quot;,&quot;volatile&quot;,&quot;enum&quot;,&quot;extern&quot;,&quot;auto&quot;,&quot;register&quot;
+    };
+    int key=sizeof(keywords)/sizeof(keywords[0]);
+    for(int i=0;i&lt;n;){
+        if(isspace(s[i])) {
+            i++;
+            continue;
+        }
+        else if(isalpha(s[i])) {
+            char temp[50];
+            int j=0;
+            while(i&lt;n&amp;&amp;(isalpha(s[i])||isdigit(s[i]))){
+                temp[j++]=s[i++];
+            }
+            temp[j]=&#x27;\0&#x27;;
+            int flag=0;
+            for(int k=0;k&lt;key;k++){
+                if(strcmp(temp,keywords[k])==0){
+                    printf(&quot;%s is a keyword\n&quot;,temp);
+                    flag=1;
+                    break;
+                }
+            }
+            if(!flag){
+                printf(&quot;%s is an identifier\n&quot;,temp);
+            }
+            continue;
+        }
+        else if(isdigit(s[i])) {
+            char temp[50];
+            int j=0;
+            while (i&lt;n&amp;&amp;isdigit(s[i])){
+                temp[j++]=s[i++];
+            }
+            temp[j]=&#x27;\0&#x27;;
+            printf(&quot;%s is a number\n&quot;,temp);
+            continue;
+        }
+        else if((s[i]==&#x27;+&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)||(s[i]==&#x27;-&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)||
+            (s[i]==&#x27;*&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)|| (s[i]==&#x27;/&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)||
+            (s[i]==&#x27;=&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)|| (s[i]==&#x27;!&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)||
+            (s[i]==&#x27;&gt;&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)|| (s[i]==&#x27;&lt;&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;)||(s[i]==&#x27;+&#x27;&amp;&amp;s[i+1]==&#x27;+&#x27;)||(s[i]==&#x27;-&#x27;&amp;&amp;s[i+1]==&#x27;-&#x27;))
+        {
+            printf(&quot;%c%c is an operator\n&quot;,s[i],s[i+1]);
+            i+=2;
+            continue;
+        }
+        else if (s[i] == &#x27;+&#x27; || s[i] == &#x27;-&#x27; || s[i] == &#x27;*&#x27; || s[i] == &#x27;/&#x27; || s[i] == &#x27;=&#x27;||s[i]==&#x27;&gt;&#x27;||s[i]==&#x27;&lt;&#x27;) {
+            printf(&quot;%c is an operator\n&quot;, s[i]);
+            i++;
+            continue;
+        }
+        else if (s[i] == &#x27;,&#x27; || s[i] == &#x27;(&#x27; || s[i] == &#x27;)&#x27; ||  
+         s[i] == &#x27;{&#x27; || s[i] == &#x27;}&#x27; || s[i] == &#x27;[&#x27; || s[i] == &#x27;]&#x27;) {
+            printf(&quot;%c is a separator\n&quot;,s[i]);
+            i++;
+            continue;
+        }
+        else if (s[i] == &#x27;;&#x27;) {
+            printf(&quot;; is a delimiter\n&quot;);
+            i++;
+            continue;
+        }
+    }
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab2-lexicalanalyzer.txt</h2>
+            <button class="btn-copy" id="btn-lab2lexicalanalyzertxt" onclick="copyToClipboard('lab2lexicalanalyzertxt', 'btn-lab2lexicalanalyzertxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab2lexicalanalyzertxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+struct symbol {
+    char name[20];
+    char type[10];
+    int address;
+};
+
+struct symbol table[50];
+int symCount = 0;
+int memAddress = 1000;
+
+int exists(char *name) {
+    for (int i = 0; i &lt; symCount; i++) {
+        if (strcmp(table[i].name, name) == 0)
+            return 1;
+    }
+    return 0;
+}
+
+int getSize(char *type) {
+    if (strcmp(type, &quot;char&quot;) == 0)   return 1;
+    if (strcmp(type, &quot;int&quot;) == 0)    return 4;
+    if (strcmp(type, &quot;float&quot;) == 0)  return 4;
+    if (strcmp(type, &quot;double&quot;) == 0) return 8;
+    return 4;
+}
+
+int isKeyword(char *buf) {
+    const char *keywords[] = {
+        &quot;int&quot;,&quot;float&quot;,&quot;char&quot;,&quot;double&quot;,&quot;long&quot;,&quot;short&quot;,&quot;signed&quot;,&quot;unsigned&quot;,
+        &quot;for&quot;,&quot;while&quot;,&quot;do&quot;,&quot;if&quot;,&quot;else&quot;,&quot;switch&quot;,&quot;case&quot;,&quot;default&quot;,&quot;break&quot;,
+        &quot;continue&quot;,&quot;return&quot;,&quot;void&quot;,&quot;static&quot;,&quot;struct&quot;,&quot;union&quot;,&quot;typedef&quot;,
+        &quot;const&quot;,&quot;goto&quot;,&quot;sizeof&quot;,&quot;volatile&quot;,&quot;enum&quot;,&quot;extern&quot;,&quot;auto&quot;,&quot;register&quot;,
+        &quot;printf&quot;
+    };
+
+    int n = sizeof(keywords) / sizeof(keywords[0]);
+    for (int i = 0; i &lt; n; i++)
+        if (strcmp(buf, keywords[i]) == 0)
+            return 1;
+    return 0;
+}
+
+int isDataType(char *buf) {
+    return (strcmp(buf,&quot;int&quot;)==0 || strcmp(buf,&quot;float&quot;)==0 || strcmp(buf,&quot;char&quot;)==0 ||
+            strcmp(buf,&quot;double&quot;)==0);
+}
+
+int main() {
+    char s[200];
+    char currentType[10] = &quot;&quot;;
+    int inDeclaration = 0;
+
+    printf(&quot;Enter the code\n&quot;);
+
+    while (1) {
+        if (!fgets(s, sizeof(s), stdin))
+            break;
+
+        if (strcmp(s, &quot;\n&quot;) == 0)
+            break;
+
+        int n = strlen(s);
+
+        for (int i = 0; i &lt; n; ) {
+
+            if (isspace(s[i])) {
+                i++;
+            }
+
+            else if (isalpha(s[i])) {
+                char buf[50];
+                int j = 0;
+
+                while (i &lt; n &amp;&amp; (isalpha(s[i]) || isdigit(s[i]))) {
+                    buf[j++] = s[i++];
+                }
+                buf[j] = &#x27;\0&#x27;;
+
+                if (isKeyword(buf)) {
+                    printf(&quot;%s is keyword\n&quot;, buf);
+
+                    if (isDataType(buf)) {
+                        strcpy(currentType, buf);
+                        inDeclaration = 1;
+                    }
+                }
+                else {
+                    printf(&quot;%s is identifier\n&quot;, buf);
+
+                    int temp = i;
+                    while (temp &lt; n &amp;&amp; isspace(s[temp])) temp++;
+
+                    if (temp &lt; n &amp;&amp; s[temp] == &#x27;(&#x27;) {
+                        /* function name – ignore */
+                    }
+                    else if (inDeclaration &amp;&amp; !exists(buf)) {
+                        strcpy(table[symCount].name, buf);
+                        strcpy(table[symCount].type, currentType);
+                        table[symCount].address = memAddress;
+
+                        memAddress += getSize(currentType);
+                        symCount++;
+                    }
+                }
+            }
+
+            else if (isdigit(s[i])) {
+                char num[20];
+                int j = 0;
+
+                while (i &lt; n &amp;&amp; isdigit(s[i]))
+                    num[j++] = s[i++];
+                num[j] = &#x27;\0&#x27;;
+
+                printf(&quot;%s is number\n&quot;, num);
+            }
+
+            else if (i+1 &lt; n &amp;&amp;
+                    ((s[i]==&#x27;+&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;) ||
+                     (s[i]==&#x27;-&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;) ||
+                     (s[i]==&#x27;*&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;) ||
+                     (s[i]==&#x27;/&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;))) {
+                printf(&quot;%c%c is assignment operator\n&quot;, s[i], s[i+1]);
+                i += 2;
+            }
+
+            else if (i+1 &lt; n &amp;&amp;
+                    ((s[i]==&#x27;+&#x27;&amp;&amp;s[i+1]==&#x27;+&#x27;) ||
+                     (s[i]==&#x27;-&#x27;&amp;&amp;s[i+1]==&#x27;-&#x27;))) {
+                printf(&quot;%c%c is arithmetic operator\n&quot;, s[i], s[i+1]);
+                i += 2;
+            }
+
+            else if (i+1 &lt; n &amp;&amp;
+                    ((s[i]==&#x27;=&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;) ||
+                     (s[i]==&#x27;&lt;&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;) ||
+                     (s[i]==&#x27;&gt;&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;) ||
+                     (s[i]==&#x27;!&#x27;&amp;&amp;s[i+1]==&#x27;=&#x27;))) {
+                printf(&quot;%c%c is relational operator\n&quot;, s[i], s[i+1]);
+                i += 2;
+            }
+
+            else if (s[i] == &#x27;&quot;&#x27;) {
+                char str[100];
+                int j = 0;
+                str[j++] = s[i++];
+
+                while (i &lt; n &amp;&amp; s[i] != &#x27;&quot;&#x27;)
+                    str[j++] = s[i++];
+
+                if (i &lt; n)
+                    str[j++] = s[i++];
+
+                str[j] = &#x27;\0&#x27;;
+                printf(&quot;%s is string literal\n&quot;, str);
+            }
+
+            else if (strchr(&quot;+-*/&quot;, s[i])) {
+                printf(&quot;%c is arithmetic operator\n&quot;, s[i]);
+                i++;
+            }
+
+            else if (s[i] == &#x27;=&#x27;) {
+                printf(&quot;= is assignment operator\n&quot;);
+                i++;
+            }
+
+            else if (strchr(&quot;,(){}[]&quot;, s[i])) {
+                printf(&quot;%c is operator\n&quot;, s[i]);
+                i++;
+            }
+
+            else if (s[i] == &#x27;;&#x27;) {
+                printf(&quot;; is delimiter\n&quot;);
+                currentType[0] = &#x27;\0&#x27;;
+                inDeclaration = 0;
+                i++;
+            }
+
+            else {
+                i++;
+            }
+        }
+    }
+
+    printf(&quot;\nSYMBOL TABLE\n&quot;);
+    printf(&quot;---------------------------------\n&quot;);
+    printf(&quot;Identifier\tType\tAddress\n&quot;);
+    printf(&quot;---------------------------------\n&quot;);
+
+    for (int i = 0; i &lt; symCount; i++) {
+        printf(&quot;%s\t\t%s\t%d\n&quot;,
+               table[i].name,
+               table[i].type,
+               table[i].address);
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab3-reToNFA.txt</h2>
+            <button class="btn-copy" id="btn-lab3reToNFAtxt" onclick="copyToClipboard('lab3reToNFAtxt', 'btn-lab3reToNFAtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab3reToNFAtxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;ctype.h&gt;
+#define MAX_STATES 100
+#define MAX_SYMBOLS 3  // a, b, ε
+#define E 2
+typedef struct {
+    int transitions[MAX_SYMBOLS][MAX_STATES];
+    int trans_count[MAX_SYMBOLS];
+    int is_final;
+    int is_start;
+} NFAState;
+NFAState nfa[MAX_STATES];
+int state_count = 0;
+int start_state = 0;
+int final_state = 0;
+typedef struct {
+    int start;
+    int end;
+} Frag;
+Frag frag_stack[100];
+int frag_stack_top = -1;
+void init_nfa() {
+    for(int i = 0; i &lt; MAX_STATES; i++) {
+        for(int j = 0; j &lt; MAX_SYMBOLS; j++) {
+            nfa[i].trans_count[j] = 0;
+        }
+        nfa[i].is_final = 0;
+        nfa[i].is_start = 0;
+    }
+    state_count = 0;
+    frag_stack_top = -1;
+}
+int create_state() {
+    return state_count++;
+}
+void add_transition(int from, int to, char symbol) {
+    int sym_index;
+    if(symbol == &#x27;a&#x27;) sym_index = 0;
+    else if(symbol == &#x27;b&#x27;) sym_index = 1;
+    else if(symbol == &#x27;e&#x27;) sym_index = 2;
+    else {
+        printf(&quot;Error: Invalid symbol &#x27;%c&#x27;\n&quot;, symbol);
+        return;
+    }
+    nfa[from].transitions[sym_index][nfa[from].trans_count[sym_index]++] = to;
+}
+void push_frag(Frag f) {
+    frag_stack[++frag_stack_top] = f;
+}
+
+Frag pop_frag() {
+    return frag_stack[frag_stack_top--];
+}
+Frag create_frag(int start, int end) {
+    Frag f = {start, end};
+    return f;
+}
+int precedence(char op) {
+    switch(op) {
+        case &#x27;|&#x27;: case &#x27;+&#x27;: return 1;
+        case &#x27;.&#x27;: return 2;
+        case &#x27;*&#x27;: return 3;
+        default: return 0;
+    }
+}
+void apply_operator(char op) {
+    if(op == &#x27;*&#x27;) {  // Kleene star
+        Frag f = pop_frag();
+        int s = create_state();
+        int e = create_state();
+        add_transition(s, f.start, &#x27;e&#x27;);
+        add_transition(s, e, &#x27;e&#x27;);
+        add_transition(f.end, f.start, &#x27;e&#x27;);
+        add_transition(f.end, e, &#x27;e&#x27;);
+        push_frag(create_frag(s, e));
+    }
+    else if(op == &#x27;|&#x27; || op == &#x27;+&#x27;) {  // Union
+        Frag f2 = pop_frag();
+        Frag f1 = pop_frag();
+        int s = create_state();
+        int e = create_state();
+        add_transition(s, f1.start, &#x27;e&#x27;);
+        add_transition(s, f2.start, &#x27;e&#x27;);
+        add_transition(f1.end, e, &#x27;e&#x27;);
+        add_transition(f2.end, e, &#x27;e&#x27;);
+        push_frag(create_frag(s, e));
+    }
+    else if(op == &#x27;.&#x27;) {  // Concatenation
+        Frag f2 = pop_frag();
+        Frag f1 = pop_frag();
+        add_transition(f1.end, f2.start, &#x27;e&#x27;);
+        push_frag(create_frag(f1.start, f2.end));
+    }
+}
+void to_postfix(char* infix, char* postfix) {
+    char stack[100];
+    int stack_top = -1;
+    int pi = 0;
+    for(int i = 0; infix[i]; i++) {
+        char c = infix[i];
+        if(c == &#x27;a&#x27; || c == &#x27;b&#x27;) {
+            postfix[pi++] = c;
+            if(i+1 &lt; strlen(infix)) {
+                char next = infix[i+1];
+                if(next == &#x27;a&#x27; || next == &#x27;b&#x27; || next == &#x27;(&#x27;) {
+                    while(stack_top &gt;= 0 &amp;&amp; precedence(&#x27;.&#x27;) &lt;= precedence(stack[stack_top])) {
+                        postfix[pi++] = stack[stack_top--];
+                    }
+                    stack[++stack_top] = &#x27;.&#x27;;
+                }
+            }
+        }
+        else if(c == &#x27;(&#x27;) {
+            if(i &gt; 0) {
+                char prev = infix[i-1];
+                if(prev == &#x27;a&#x27; || prev == &#x27;b&#x27; || prev == &#x27;)&#x27; || prev == &#x27;*&#x27;) {
+                    while(stack_top &gt;= 0 &amp;&amp; precedence(&#x27;.&#x27;) &lt;= precedence(stack[stack_top])) {
+                        postfix[pi++] = stack[stack_top--];
+                    }
+                    stack[++stack_top] = &#x27;.&#x27;;
+                }
+            }
+            stack[++stack_top] = &#x27;(&#x27;;
+        }
+        else if(c == &#x27;)&#x27;) {
+            while(stack_top &gt;= 0 &amp;&amp; stack[stack_top] != &#x27;(&#x27;) {
+                postfix[pi++] = stack[stack_top--];
+            }
+            stack_top--;  // Remove &#x27;(&#x27;
+        }
+        else if(c == &#x27;*&#x27;) {
+            postfix[pi++] = c;
+            if(i+1 &lt; strlen(infix)) {
+                char next = infix[i+1];
+                if(next == &#x27;a&#x27; || next == &#x27;b&#x27; || next == &#x27;(&#x27;) {
+                    while(stack_top &gt;= 0 &amp;&amp; precedence(&#x27;.&#x27;) &lt;= precedence(stack[stack_top])) {
+                        postfix[pi++] = stack[stack_top--];
+                    }
+                    stack[++stack_top] = &#x27;.&#x27;;
+                }
+            }
+        }
+        else if(c == &#x27;|&#x27; || c == &#x27;+&#x27;) {
+            while(stack_top &gt;= 0 &amp;&amp; precedence(c) &lt;= precedence(stack[stack_top])) {
+                postfix[pi++] = stack[stack_top--];
+            }
+            stack[++stack_top] = c;
+        }
+    }
+    while(stack_top &gt;= 0) {
+        postfix[pi++] = stack[stack_top--];
+    }
+    postfix[pi] = &#x27;\0&#x27;;
+}
+Frag build_nfa(char* postfix) {
+    for(int i = 0; postfix[i]; i++) {
+        char c = postfix[i];
+        if(c == &#x27;a&#x27; || c == &#x27;b&#x27;) {
+            int s = create_state();
+            int e = create_state();
+            add_transition(s, e, c);
+            push_frag(create_frag(s, e));
+        }
+        else {
+            apply_operator(c);
+        }
+    }
+    return pop_frag();
+}
+void display_nfa() {
+    printf(&quot;\nNFA Transition Table:\n&quot;);
+    for(int i = 0; i &lt; state_count; i++) {
+        for(int j = 0; j &lt; nfa[i].trans_count[0]; j++) {
+            printf(&quot;q%d ---a--&gt; q%d\n&quot;, i+1, nfa[i].transitions[0][j]+1);
+        }
+        for(int j = 0; j &lt; nfa[i].trans_count[1]; j++) {
+            printf(&quot;q%d ---b--&gt; q%d\n&quot;, i+1, nfa[i].transitions[1][j]+1);
+        }
+        if(nfa[i].trans_count[2] &gt; 0) {
+            printf(&quot;q%d ---e--&gt; &quot;, i+1);
+            for(int j = 0; j &lt; nfa[i].trans_count[2]; j++) {
+                printf(&quot;q%d&quot;, nfa[i].transitions[2][j]+1);
+                if(j &lt; nfa[i].trans_count[2]-1) printf(&quot; , &quot;);
+            }
+            printf(&quot;\n&quot;);
+        }
+    }
+    printf(&quot;\nStart State: q%d\n&quot;, start_state+1);
+    printf(&quot;Final State: q%d\n&quot;, final_state+1);
+}
+int main() {
+    char regex[100], postfix[200];
+    printf(&quot;Enter regex: &quot;);
+    scanf(&quot;%s&quot;, regex);
+    init_nfa();
+    to_postfix(regex, postfix);
+    Frag result = build_nfa(postfix);
+    start_state = result.start;
+    final_state = result.end;
+    nfa[start_state].is_start = 1;
+    nfa[final_state].is_final = 1;
+    display_nfa();
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab4-eclosureToNfa.txt</h2>
+            <button class="btn-copy" id="btn-lab4eclosureToNfatxt" onclick="copyToClipboard('lab4eclosureToNfatxt', 'btn-lab4eclosureToNfatxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab4eclosureToNfatxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;ctype.h&gt;
+
+#define MAX_STATES 100
+#define MAX_SYMBOLS 3  // 0:a, 1:b, 2:ε
+#define EPSILON 2
+
+// Structure for NFA state
+typedef struct {
+    int a_trans[MAX_STATES];
+    int b_trans[MAX_STATES];
+    int eps_trans[MAX_STATES];
+    int a_count, b_count, eps_count;
+    int is_final;
+} NFAState;
+
+NFAState nfa[MAX_STATES];
+int state_count = 1;  // Start from 1 for q1
+int start_state = 1;
+int final_state = 1;
+
+
+
+// Stack for Thompson construction
+typedef struct {
+    int start;
+    int end;
+} Frag;
+
+Frag stack[100];
+int stack_top = -1;
+
+// Function prototypes
+void init_nfa();
+void add_transition(int from, int to, char symbol);
+int create_state();
+void push_frag(Frag f);
+Frag pop_frag();
+Frag create_frag(int start, int end);
+int precedence(char op);
+char* to_postfix(char* infix);
+void build_nfa_from_postfix(char* postfix);
+void apply_operator(char op);
+void display_nfa();
+void compute_epsilon_matrix(int epsilon[MAX_STATES][MAX_STATES]);
+void dfs_closure(int state, int visited[], int epsilon[MAX_STATES][MAX_STATES]);
+void display_epsilon_matrix(int epsilon[MAX_STATES][MAX_STATES]);
+void display_epsilon_closures(int epsilon[MAX_STATES][MAX_STATES]);
+
+// Initialize NFA
+void init_nfa() {
+    for(int i = 0; i &lt; MAX_STATES; i++) {
+        nfa[i].a_count = nfa[i].b_count = nfa[i].eps_count = 0;
+        nfa[i].is_final = 0;
+        for(int j = 0; j &lt; MAX_STATES; j++) {
+            nfa[i].a_trans[j] = nfa[i].b_trans[j] = nfa[i].eps_trans[j] = 0;
+        }
+    }
+    state_count = 1;
+    stack_top = -1;
+}
+
+// Create a new state
+int create_state() {
+    return state_count++;
+}
+
+// Add a transition
+void add_transition(int from, int to, char symbol) {
+    if(symbol == &#x27;a&#x27;) {
+        nfa[from].a_trans[nfa[from].a_count++] = to;
+    }
+    else if(symbol == &#x27;b&#x27;) {
+        nfa[from].b_trans[nfa[from].b_count++] = to;
+    }
+    else if(symbol == &#x27;e&#x27;) {
+        nfa[from].eps_trans[nfa[from].eps_count++] = to;
+    }
+}
+
+// Stack operations
+void push_frag(Frag f) {
+    if(stack_top &lt; 99) {
+        stack[++stack_top] = f;
+    }
+}
+
+Frag pop_frag() {
+    if(stack_top &gt;= 0) {
+        return stack[stack_top--];
+    }
+    Frag empty = {-1, -1};
+    return empty;
+}
+
+Frag create_frag(int start, int end) {
+    Frag f = {start, end};
+    return f;
+}
+
+// Operator precedence
+int precedence(char op) {
+    if(op == &#x27;|&#x27; || op == &#x27;+&#x27;) return 1;
+    if(op == &#x27;.&#x27;) return 2;
+    if(op == &#x27;*&#x27;) return 3;
+    return 0;
+}
+
+// Convert infix to postfix
+char* to_postfix(char* infix) {
+    static char postfix[200];
+    char stack[100];
+    int stack_top = -1;
+    int pi = 0;
+    int len = strlen(infix);
+    
+    for(int i = 0; i &lt; len; i++) {
+        char c = infix[i];
+        
+        if(c == &#x27;a&#x27; || c == &#x27;b&#x27;) {
+            postfix[pi++] = c;
+            
+            // Check for implicit concatenation
+            if(i + 1 &lt; len) {
+                char next = infix[i + 1];
+                if(next == &#x27;a&#x27; || next == &#x27;b&#x27; || next == &#x27;(&#x27;) {
+                    while(stack_top &gt;= 0 &amp;&amp; precedence(&#x27;.&#x27;) &lt;= precedence(stack[stack_top])) {            
+                        postfix[pi++] = stack[stack_top--];
+                    }
+                    stack[++stack_top] = &#x27;.&#x27;;
+                }
+            }
+        }
+        else if(c == &#x27;(&#x27;) {
+            // Check for implicit concatenation before &#x27;(&#x27;
+            if(i &gt; 0) {
+                char prev = infix[i - 1];
+                if(prev == &#x27;a&#x27; || prev == &#x27;b&#x27; || prev == &#x27;)&#x27; || prev == &#x27;*&#x27;) {
+                    while(stack_top &gt;= 0 &amp;&amp; precedence(&#x27;.&#x27;) &lt;= precedence(stack[stack_top])) {
+                        postfix[pi++] = stack[stack_top--];
+                    }
+                    stack[++stack_top] = &#x27;.&#x27;;
+                }
+            }
+            stack[++stack_top] = &#x27;(&#x27;;
+        }
+        else if(c == &#x27;)&#x27;) {
+            while(stack_top &gt;= 0 &amp;&amp; stack[stack_top] != &#x27;(&#x27;) {
+                postfix[pi++] = stack[stack_top--];
+            }
+            if(stack_top &gt;= 0) stack_top--;  // Pop &#x27;(&#x27;
+        }
+        else if(c == &#x27;*&#x27;) {
+            postfix[pi++] = c;
+            
+            // Check for implicit concatenation after &#x27;*&#x27;
+            if(i + 1 &lt; len) {
+                char next = infix[i + 1];
+                if(next == &#x27;a&#x27; || next == &#x27;b&#x27; || next == &#x27;(&#x27;) {
+                    while(stack_top &gt;= 0 &amp;&amp; precedence(&#x27;.&#x27;) &lt;= precedence(stack[stack_top])) {
+                        postfix[pi++] = stack[stack_top--];
+                    }
+                    stack[++stack_top] = &#x27;.&#x27;;
+                }
+            }
+        }
+        else if(c == &#x27;|&#x27; || c == &#x27;+&#x27;) {
+            while(stack_top &gt;= 0 &amp;&amp; precedence(c) &lt;= precedence(stack[stack_top])) {
+                postfix[pi++] = stack[stack_top--];
+            }
+            stack[++stack_top] = c;
+        }
+    }
+    
+    // Pop remaining operators
+    while(stack_top &gt;= 0) {
+        postfix[pi++] = stack[stack_top--];
+    }
+    postfix[pi] = &#x27;\0&#x27;;
+    
+    return postfix;
+}
+
+// Apply operator using Thompson construction
+void apply_operator(char op) {
+    if(op == &#x27;*&#x27;) {  // Kleene star
+        Frag f = pop_frag();
+        int s = create_state();
+        int e = create_state();
+        
+        // ε from new start to fragment start and to new end
+        add_transition(s, f.start, &#x27;e&#x27;);
+        add_transition(s, e, &#x27;e&#x27;);
+        
+        // ε from fragment end to fragment start (loop) and to new end
+        add_transition(f.end, f.start, &#x27;e&#x27;);
+        add_transition(f.end, e, &#x27;e&#x27;);
+        
+        push_frag(create_frag(s, e));
+    }
+    else if(op == &#x27;|&#x27; || op == &#x27;+&#x27;) {  // Union
+        Frag f2 = pop_frag();
+        Frag f1 = pop_frag();
+        int s = create_state();
+        int e = create_state();
+        
+        // ε from new start to both fragments
+        add_transition(s, f1.start, &#x27;e&#x27;);
+        add_transition(s, f2.start, &#x27;e&#x27;);
+        
+        // ε from both fragments to new end
+        add_transition(f1.end, e, &#x27;e&#x27;);
+        add_transition(f2.end, e, &#x27;e&#x27;);
+        
+        push_frag(create_frag(s, e));
+    }
+    else if(op == &#x27;.&#x27;) {  // Concatenation
+        Frag f2 = pop_frag();
+        Frag f1 = pop_frag();
+        
+        // Connect end of first to start of second
+        add_transition(f1.end, f2.start, &#x27;e&#x27;);
+        
+        push_frag(create_frag(f1.start, f2.end));
+    }
+}
+
+// Build NFA from postfix expression
+void build_nfa_from_postfix(char* postfix) {
+    for(int i = 0; postfix[i] != &#x27;\0&#x27;; i++) {
+        char c = postfix[i];
+        
+        if(c == &#x27;a&#x27; || c == &#x27;b&#x27;) {
+            int s = create_state();
+            int e = create_state();
+            add_transition(s, e, c);
+            push_frag(create_frag(s, e));
+        }
+        else {
+            apply_operator(c);
+        }
+    }
+    
+    Frag result = pop_frag();
+    start_state = result.start;
+    final_state = result.end;
+}
+
+// Display NFA transitions
+void display_nfa() {
+    printf(&quot;\nNFA Transitions:\n&quot;);
+    
+    for(int i = 1; i &lt; state_count; i++) {
+        // Display &#x27;a&#x27; transitions
+        for(int j = 0; j &lt; nfa[i].a_count; j++) {
+            printf(&quot;q%d --a--&gt; q%d\n&quot;, i, nfa[i].a_trans[j]);
+        }
+        
+        // Display &#x27;b&#x27; transitions
+        for(int j = 0; j &lt; nfa[i].b_count; j++) {
+            printf(&quot;q%d --b--&gt; q%d\n&quot;, i, nfa[i].b_trans[j]);
+        }
+        
+        // Display ε transitions
+        if(nfa[i].eps_count &gt; 0) {
+            printf(&quot;q%d --e--&gt; &quot;, i);
+            for(int j = 0; j &lt; nfa[i].eps_count; j++) {
+                printf(&quot;q%d&quot;, nfa[i].eps_trans[j]);
+                if(j &lt; nfa[i].eps_count - 1) printf(&quot; , &quot;);
+            }
+            printf(&quot;\n&quot;);
+        }
+    }
+}
+
+// Compute epsilon transition matrix
+void compute_epsilon_matrix(int epsilon[MAX_STATES][MAX_STATES]) {
+    // Initialize with direct epsilon transitions
+    for(int i = 1; i &lt; state_count; i++) {
+        for(int j = 1; j &lt; state_count; j++) {
+            epsilon[i][j] = 0;
+        }
+        // Every state has epsilon to itself
+        epsilon[i][i] = 1;
+    }
+    
+    // Add direct epsilon transitions
+    for(int i = 1; i &lt; state_count; i++) {
+        for(int j = 0; j &lt; nfa[i].eps_count; j++) {
+            int to = nfa[i].eps_trans[j];
+            epsilon[i][to] = 1;
+        }
+    }
+    
+    // Compute transitive closure using Warshall&#x27;s algorithm
+    for(int k = 1; k &lt; state_count; k++) {
+        for(int i = 1; i &lt; state_count; i++) {
+            for(int j = 1; j &lt; state_count; j++) {
+                if(epsilon[i][k] &amp;&amp; epsilon[k][j]) {
+                    epsilon[i][j] = 1;
+                }
+            }
+        }
+    }
+}
+
+// DFS for epsilon closure
+void dfs_closure(int state, int visited[], int epsilon[MAX_STATES][MAX_STATES]) {
+    visited[state] = 1;
+    for(int i = 1; i &lt; state_count; i++) {
+        if(epsilon[state][i] &amp;&amp; !visited[i]) {
+            dfs_closure(i, visited, epsilon);
+        }
+    }
+}
+
+// Display epsilon matrix
+void display_epsilon_matrix(int epsilon[MAX_STATES][MAX_STATES]) {
+    printf(&quot;\nEpsilon Transition Matrix:\n   &quot;);
+    for(int i = 1; i &lt; state_count; i++) {
+        printf(&quot;Q%-2d&quot;, i);
+    }
+    printf(&quot;\n&quot;);
+    
+    for(int i = 1; i &lt; state_count; i++) {
+        printf(&quot;Q%-2d&quot;, i);
+        for(int j = 1; j &lt; state_count; j++) {
+            printf(&quot;%-3d&quot;, epsilon[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+
+// Display epsilon closures
+void display_epsilon_closures(int epsilon[MAX_STATES][MAX_STATES]) {
+    printf(&quot;\nε-Closure of states:\n&quot;);
+    
+    for(int i = 1; i &lt; state_count; i++) {
+        int visited[MAX_STATES] = {0};
+        dfs_closure(i, visited, epsilon);
+        
+        printf(&quot;ε-Closure(Q%d) = { &quot;, i);
+        int first = 1;
+        for(int j = 1; j &lt; state_count; j++) {
+            if(visited[j]) {
+                if(!first) printf(&quot; &quot;);
+                printf(&quot;Q%d&quot;, j);
+                first = 0;
+            }
+        }
+        printf(&quot; }\n&quot;);
+    }
+}
+
+int main() {
+    char regex[100];
+    int epsilon[MAX_STATES][MAX_STATES];
+    printf(&quot;Enter regex: &quot;);
+    scanf(&quot;%s&quot;, regex);
+    init_nfa();
+    char* postfix = to_postfix(regex);
+    build_nfa_from_postfix(postfix);
+    display_nfa();
+    compute_epsilon_matrix(epsilon);
+    display_epsilon_matrix(epsilon);
+    display_epsilon_closures(epsilon);
+    printf(&quot;\n...Program finished with exit code 0\n&quot;);
+    printf(&quot;Press ENTER to exit console.\n&quot;);
+    getchar();  // Clear newline
+    getchar();  // Wait for Enter
+    
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab5-FiniteAutomataUsingLEX.txt</h2>
+            <button class="btn-copy" id="btn-lab5FiniteAutomataUsingLEXtxt" onclick="copyToClipboard('lab5FiniteAutomataUsingLEXtxt', 'btn-lab5FiniteAutomataUsingLEXtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab5FiniteAutomataUsingLEXtxt">lex filename.l 
+cc lex.yy.c -o lexer -lfl 
+./lexer inputfilename.c
+
+
+%{
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+extern FILE *yyin;
+%}
+
+letter [a-zA-Z]
+digit [0-9]
+id {letter}({letter}|{digit})*
+num {digit}+
+str \&quot;[^\&quot;]*\&quot;
+
+%%
+
+int|float|char|double|long|short|signed|unsigned|for|while|do|if|else|switch|case|default|break|continue|return|void|static|struct|union|typedef|const|goto|sizeof|volatile|enum|extern|auto|register|main {
+    printf(&quot;%s is a keyword\n&quot;, yytext);
+}
+
+{str} {
+    printf(&quot;%s is a string literal\n&quot;, yytext);
+}
+
+&quot;%[a-zA-Z]&quot; {
+    printf(&quot;%s is a format specifier\n&quot;, yytext);
+}
+
+{id} {
+    printf(&quot;%s is an identifier\n&quot;, yytext);
+}
+
+{num} {
+    printf(&quot;%s is a number\n&quot;, yytext);
+}
+
+&quot;==&quot;|&quot;!=&quot;|&quot;&lt;=&quot;|&quot;&lt;&quot;|&quot;&gt;&quot;|&quot;&gt;=&quot; {
+    printf(&quot;%s is a relational operator\n&quot;, yytext);
+}
+
+&quot;+=&quot;|&quot;-=&quot;|&quot;*=&quot;|&quot;/=&quot; {
+    printf(&quot;%s is an assignment operator\n&quot;, yytext);
+}
+
+&quot;++&quot;|&quot;--&quot; {
+    printf(&quot;%s is a unary operator\n&quot;, yytext);
+}
+
+&quot;+&quot;|&quot;-&quot;|&quot;*&quot;|&quot;/&quot;|&quot;%&quot; {
+    printf(&quot;%s is an operator\n&quot;, yytext);
+}
+
+&quot;,&quot;|&quot;(&quot;|&quot;)&quot;|&quot;[&quot;|&quot;]&quot;|&quot;{&quot;|&quot;}&quot; {
+    printf(&quot;%s is a separator\n&quot;, yytext);
+}
+
+&quot;;&quot;|&quot;:&quot; {
+    printf(&quot;%s is a delimiter\n&quot;, yytext);
+}
+
+[ \t\n] { /* ignore whitespace */ }
+
+. {
+    printf(&quot;%s is unknown\n&quot;, yytext);
+}
+
+%%
+
+int yywrap(void) {
+    return 1;
+}
+
+int main(int argc, char *argv[]) {
+    if (argc &lt; 2) {
+        printf(&quot;Usage: %s &lt;inputfile&gt;\n&quot;, argv[0]);
+        return 1;
+    }
+    yyin = fopen(argv[1], &quot;r&quot;);
+    if (yyin == NULL) {
+        printf(&quot;File not found: %s\n&quot;, argv[1]);
+        return 1;
+    }
+    yylex();
+    fclose(yyin);
+    return 0;
+}
+</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab7-firstAndFollow.txt</h2>
+            <button class="btn-copy" id="btn-lab7firstAndFollowtxt" onclick="copyToClipboard('lab7firstAndFollowtxt', 'btn-lab7firstAndFollowtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab7firstAndFollowtxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+#define MAX 50
+int n;
+char productions[MAX][MAX];
+char first[26][MAX];
+char follow[26][MAX];
+int firstCount[26];
+int followCount[26];
+void add(char set[], int *count, char c) {
+    for(int i = 0; i &lt; *count; i++)
+        if(set[i] == c)
+            return;
+    set[(*count)++] = c;
+}
+
+void computeFirst(char);
+
+void firstString(char *str, int pos, int index) {
+
+    if(str[pos] == &#x27;\0&#x27;) {
+        add(first[index], &amp;firstCount[index], &#x27;#&#x27;);
+        return;
+    }
+
+    if(!isupper(str[pos])) {
+        add(first[index], &amp;firstCount[index], str[pos]);
+        return;
+    }
+
+    int next = str[pos] - &#x27;A&#x27;;
+    computeFirst(str[pos]);
+
+    int epsilon = 0;
+
+    for(int i = 0; i &lt; firstCount[next]; i++) {
+        if(first[next][i] != &#x27;#&#x27;)
+            add(first[index], &amp;firstCount[index], first[next][i]);
+        else
+            epsilon = 1;
+    }
+
+    if(epsilon)
+        firstString(str, pos+1, index);
+}
+
+void computeFirst(char symbol) {
+
+    int index = symbol - &#x27;A&#x27;;
+
+    if(firstCount[index] != 0)
+        return;
+
+    for(int i = 0; i &lt; n; i++) {
+        if(productions[i][0] == symbol) {
+
+            if(productions[i][3] == &#x27;#&#x27;)
+                add(first[index], &amp;firstCount[index], &#x27;#&#x27;);
+            else
+                firstString(productions[i], 3, index);
+        }
+    }
+}
+
+void computeFollow() {
+
+    // Rule 1
+    add(follow[productions[0][0]-&#x27;A&#x27;],
+        &amp;followCount[productions[0][0]-&#x27;A&#x27;], &#x27;$&#x27;);
+
+    int changed = 1;
+
+    while(changed) {
+
+        changed = 0;
+
+        for(int i = 0; i &lt; n; i++) {
+
+            char A = productions[i][0];
+            int Aindex = A - &#x27;A&#x27;;
+
+            for(int j = 3; productions[i][j] != &#x27;\0&#x27;; j++) {
+
+                if(isupper(productions[i][j])) {
+
+                    int Bindex = productions[i][j] - &#x27;A&#x27;;
+                    int k = j + 1;
+                    int epsilonAll = 1;
+
+                    // Check β part
+                    while(productions[i][k] != &#x27;\0&#x27;) {
+
+                        epsilonAll = 0;
+
+                        if(!isupper(productions[i][k])) {
+
+                            int before = followCount[Bindex];
+                            add(follow[Bindex], &amp;followCount[Bindex],
+                                productions[i][k]);
+
+                            if(before != followCount[Bindex])
+                                changed = 1;
+
+                            epsilonAll = 0;
+                            break;
+                        }
+
+                        int next = productions[i][k] - &#x27;A&#x27;;
+                        int epsilon = 0;
+
+                        for(int x = 0; x &lt; firstCount[next]; x++) {
+
+                            if(first[next][x] != &#x27;#&#x27;) {
+                                int before = followCount[Bindex];
+                                add(follow[Bindex], &amp;followCount[Bindex],
+                                    first[next][x]);
+
+                                if(before != followCount[Bindex])
+                                    changed = 1;
+                            }
+                            else
+                                epsilon = 1;
+                        }
+
+                        if(!epsilon) {
+                            epsilonAll = 0;
+                            break;
+                        }
+
+                        epsilonAll = 1;
+                        k++;
+                    }
+
+                    // Rule 3 &amp; 4
+                    if(epsilonAll || productions[i][j+1] == &#x27;\0&#x27;) {
+
+                        for(int x = 0; x &lt; followCount[Aindex]; x++) {
+
+                            int before = followCount[Bindex];
+                            add(follow[Bindex], &amp;followCount[Bindex],
+                                follow[Aindex][x]);
+
+                            if(before != followCount[Bindex])
+                                changed = 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main() {
+
+    printf(&quot;Enter number of productions: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter productions (Example: E-&gt;TR):\n&quot;);
+    for(int i = 0; i &lt; n; i++)
+        scanf(&quot;%s&quot;, productions[i]);
+
+    for(int i = 0; i &lt; n; i++)
+        computeFirst(productions[i][0]);
+
+    computeFollow();
+
+    printf(&quot;\nFIRST Sets:\n&quot;);
+    for(int i = 0; i &lt; 26; i++) {
+        if(firstCount[i] &gt; 0) {
+            printf(&quot;FIRST(%c) = { &quot;, i + &#x27;A&#x27;);
+            for(int j = 0; j &lt; firstCount[i]; j++)
+                printf(&quot;%c &quot;, first[i][j]);
+            printf(&quot;}\n&quot;);
+        }
+    }
+
+    printf(&quot;\nFOLLOW Sets:\n&quot;);
+    for(int i = 0; i &lt; 26; i++) {
+        if(followCount[i] &gt; 0) {
+            printf(&quot;FOLLOW(%c) = { &quot;, i + &#x27;A&#x27;);
+            for(int j = 0; j &lt; followCount[i]; j++)
+                printf(&quot;%c &quot;, follow[i][j]);
+            printf(&quot;}\n&quot;);
+        }
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab8-predictiveParser.txt</h2>
+            <button class="btn-copy" id="btn-lab8predictiveParsertxt" onclick="copyToClipboard('lab8predictiveParsertxt', 'btn-lab8predictiveParsertxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab8predictiveParsertxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+#include &lt;stdbool.h&gt;
+#define MAX 50
+#define MAX_PROD_LEN 100
+char productions[MAX][MAX_PROD_LEN];
+char nonTerminals[26];
+char terminals[26];
+char first[26][MAX];
+char follow[26][MAX];
+char table[26][26][200];
+int n;
+int ntCount = 0, tCount = 0;
+int firstCount[26], followCount[26];
+bool nullable[26] = {false};
+int getNTIndex(char c);
+int getTIndex(char c);
+void addFirst(int idx, char c);
+void addFollow(int idx, char c);
+void addToTable(int row, int col, char prod[]);
+void findFirst();
+void findFollow();
+void computeNullable();
+void collectTerminals();
+void constructTable();
+void printTable();
+void printSets();
+void sortTerminals();
+int getNTIndex(char c) {
+    for(int i = 0; i &lt; ntCount; i++)
+        if(nonTerminals[i] == c) return i;
+    return -1;
+}
+int getTIndex(char c) {
+    for(int i = 0; i &lt; tCount; i++)
+        if(terminals[i] == c) return i;
+    return -1;
+}
+void addFirst(int idx, char c) {
+    for(int i = 0; i &lt; firstCount[idx]; i++)
+        if(first[idx][i] == c) return;
+    first[idx][firstCount[idx]++] = c;
+}
+void addFollow(int idx, char c) {
+    for(int i = 0; i &lt; followCount[idx]; i++)
+        if(follow[idx][i] == c) return;
+    follow[idx][followCount[idx]++] = c;
+}
+void addToTable(int row, int col, char prod[]) {
+    if(strlen(table[row][col]) == 0)
+        strcpy(table[row][col], prod);
+    else {
+        strcat(table[row][col], &quot; | &quot;);
+        strcat(table[row][col], prod);
+    }
+}
+void sortTerminals() {
+    for(int i = 0; i &lt; tCount - 1; i++) {
+        for(int j = 0; j &lt; tCount - i - 1; j++) {
+            if(terminals[j] &gt; terminals[j + 1]) {
+                char temp = terminals[j];
+                terminals[j] = terminals[j + 1];
+                terminals[j + 1] = temp;
+            }
+        }
+    }
+}
+void computeNullable() {
+    bool changed;
+    do {
+        changed = false;
+        for(int i = 0; i &lt; n; i++) {
+            char lhs = productions[i][0];
+            int lhsIdx = getNTIndex(lhs);
+            if(productions[i][3] == &#x27;#&#x27;) {
+                if(!nullable[lhsIdx]) {
+                    nullable[lhsIdx] = true;
+                    changed = true;
+                }
+                continue;
+            }
+            bool allNullable = true;
+            for(int j = 3; productions[i][j] != &#x27;\0&#x27;; j++) {
+                char symbol = productions[i][j];
+                if(isupper(symbol)) {
+                    int symIdx = getNTIndex(symbol);
+                    if(!nullable[symIdx]) {
+                        allNullable = false;
+                        break;
+                    }
+                } else {
+                    allNullable = false;
+                    break;
+                }
+            }
+            
+            if(allNullable &amp;&amp; !nullable[lhsIdx]) {
+                nullable[lhsIdx] = true;
+                changed = true;
+            }
+        }
+    } while(changed);
+}
+void findFirst() {
+    bool changed;
+    do {
+        changed = false;
+        for(int i = 0; i &lt; n; i++) {
+            char lhs = productions[i][0];
+            int lhsIdx = getNTIndex(lhs);
+            char *rhs = &amp;productions[i][3];
+            if(rhs[0] == &#x27;#&#x27;) {
+                if(firstCount[lhsIdx] == 0 || first[lhsIdx][0] != &#x27;#&#x27;) {
+                    firstCount[lhsIdx] = 0;
+                    addFirst(lhsIdx, &#x27;#&#x27;);
+                    changed = true;
+                }
+                continue;
+            }
+            bool allNullable = true;
+            for(int j = 0; rhs[j] != &#x27;\0&#x27;; j++) {
+                char symbol = rhs[j];
+                if(!isupper(symbol)) {
+                    bool found = false;
+                    for(int k = 0; k &lt; firstCount[lhsIdx]; k++) {
+                        if(first[lhsIdx][k] == symbol) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if(!found) {
+                        addFirst(lhsIdx, symbol);
+                        changed = true;
+                    }
+                    allNullable = false;
+                    break;
+                } else {
+                    int symIdx = getNTIndex(symbol);
+                    for(int k = 0; k &lt; firstCount[symIdx]; k++) {
+                        if(first[symIdx][k] != &#x27;#&#x27;) {
+                            bool found = false;
+                            for(int m = 0; m &lt; firstCount[lhsIdx]; m++) {
+                                if(first[lhsIdx][m] == first[symIdx][k]) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(!found) {
+                                addFirst(lhsIdx, first[symIdx][k]);
+                                changed = true;
+                            }
+                        }
+                    }
+                    if(!nullable[symIdx]) {
+                        allNullable = false;
+                        break;
+                    }
+                }
+            }
+            if(allNullable) {
+                bool found = false;
+                for(int k = 0; k &lt; firstCount[lhsIdx]; k++) {
+                    if(first[lhsIdx][k] == &#x27;#&#x27;) {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found) {
+                    addFirst(lhsIdx, &#x27;#&#x27;);
+                    changed = true;
+                }
+            }
+        }
+    } while(changed);
+}
+void findFollow() {
+    addFollow(0, &#x27;$&#x27;);
+    bool changed;
+    do {
+        changed = false;
+        for(int i = 0; i &lt; n; i++) {
+            char lhs = productions[i][0];
+            int lhsIdx = getNTIndex(lhs);
+            char *rhs = &amp;productions[i][3];
+            for(int j = 0; rhs[j] != &#x27;\0&#x27;; j++) {
+                char symbol = rhs[j];
+                if(isupper(symbol)) {
+                    int symIdx = getNTIndex(symbol);
+                    bool allFollowingNullable = true;
+                    for(int k = j + 1; rhs[k] != &#x27;\0&#x27;; k++) {
+                        char next = rhs[k];
+                        if(!isupper(next)) {
+                            bool found = false;
+                            for(int m = 0; m &lt; followCount[symIdx]; m++) {
+                                if(follow[symIdx][m] == next) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(!found) {
+                                addFollow(symIdx, next);
+                                changed = true;
+                            }
+                            allFollowingNullable = false;
+                            break;
+                        } else {
+                            int nextIdx = getNTIndex(next);
+                            for(int m = 0; m &lt; firstCount[nextIdx]; m++) {
+                                if(first[nextIdx][m] != &#x27;#&#x27;) {
+                                    bool found = false;
+                                    for(int p = 0; p &lt; followCount[symIdx]; p++) {
+                                        if(follow[symIdx][p] == first[nextIdx][m]) {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if(!found) {
+                                        addFollow(symIdx, first[nextIdx][m]);
+                                        changed = true;
+                                    }
+                                }
+                            }
+                            if(!nullable[nextIdx]) {
+                                allFollowingNullable = false;
+                                break;
+                            }
+                        }
+                    }
+                    if(allFollowingNullable || rhs[j + 1] == &#x27;\0&#x27;) {
+                        for(int m = 0; m &lt; followCount[lhsIdx]; m++) {
+                            bool found = false;
+                            for(int p = 0; p &lt; followCount[symIdx]; p++) {
+                                if(follow[symIdx][p] == follow[lhsIdx][m]) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(!found) {
+                                addFollow(symIdx, follow[lhsIdx][m]);
+                                changed = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } while(changed);
+}
+
+void collectTerminals() {
+    tCount = 0;
+    for(int i = 0; i &lt; n; i++) {
+        for(int j = 3; productions[i][j] != &#x27;\0&#x27;; j++) {
+            char c = productions[i][j];
+            if(!isupper(c) &amp;&amp; c != &#x27;#&#x27;) {
+                if(getTIndex(c) == -1)
+                    terminals[tCount++] = c;
+            }
+        }
+    }
+    terminals[tCount++] = &#x27;$&#x27;;
+    sortTerminals();
+}
+
+void constructTable() {
+    for(int i = 0; i &lt; ntCount; i++) {
+        for(int j = 0; j &lt; tCount; j++) {
+            strcpy(table[i][j], &quot;-&quot;);
+        }
+    }
+    for(int i = 0; i &lt; n; i++) {
+        char lhs = productions[i][0];
+        int row = getNTIndex(lhs);
+        char *rhs = &amp;productions[i][3];
+        if(rhs[0] == &#x27;#&#x27;) {
+            for(int j = 0; j &lt; followCount[row]; j++) {
+                int col = getTIndex(follow[row][j]);
+                if(col != -1) {
+                    if(strcmp(table[row][col], &quot;-&quot;) == 0)
+                        strcpy(table[row][col], productions[i]);
+                    else {
+                        strcat(table[row][col], &quot; | &quot;);
+                        strcat(table[row][col], productions[i]);
+                    }
+                }
+            }
+        } else {
+            bool allNullable = true;
+            int pos = 0;
+            while(rhs[pos] != &#x27;\0&#x27;) {
+                char symbol = rhs[pos];
+                if(!isupper(symbol)) {
+                    int col = getTIndex(symbol);
+                    if(col != -1) {
+                        if(strcmp(table[row][col], &quot;-&quot;) == 0)
+                            strcpy(table[row][col], productions[i]);
+                        else {
+                            strcat(table[row][col], &quot; | &quot;);
+                            strcat(table[row][col], productions[i]);
+                        }
+                    }
+                    allNullable = false;
+                    break;
+                } else {
+                    int symIdx = getNTIndex(symbol);
+                    for(int k = 0; k &lt; firstCount[symIdx]; k++) {
+                        if(first[symIdx][k] != &#x27;#&#x27;) {
+                            int col = getTIndex(first[symIdx][k]);
+                            if(col != -1) {
+                                if(strcmp(table[row][col], &quot;-&quot;) == 0)
+                                    strcpy(table[row][col], productions[i]);
+                                else {
+                                    strcat(table[row][col], &quot; | &quot;);
+                                    strcat(table[row][col], productions[i]);
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(!nullable[symIdx]) {
+                        allNullable = false;
+                        break;
+                    }
+                    pos++;
+                }
+            }
+            if(allNullable) {
+                for(int j = 0; j &lt; followCount[row]; j++) {
+                    int col = getTIndex(follow[row][j]);
+                    if(col != -1) {
+                        if(strcmp(table[row][col], &quot;-&quot;) == 0)
+                            strcpy(table[row][col], productions[i]);
+                        else {
+                            strcat(table[row][col], &quot; | &quot;);
+                            strcat(table[row][col], productions[i]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+void printTable() {
+    int colWidth = 15;
+    int ntWidth = 15;
+    printf(&quot;%-*s&quot;, ntWidth, &quot;Non-Terminal&quot;);
+    for(int i = 0; i &lt; tCount; i++) {
+        if(terminals[i] == &#x27;#&#x27;) continue; // Skip ε in table header
+        printf(&quot;%-*c&quot;, colWidth, terminals[i]);
+    }
+    printf(&quot;\n&quot;);
+    for(int i = 0; i &lt; ntWidth; i++) printf(&quot;-&quot;);
+    for(int i = 0; i &lt; tCount; i++) {
+        if(terminals[i] == &#x27;#&#x27;) continue;
+        for(int j = 0; j &lt; colWidth; j++) printf(&quot;-&quot;);
+    }
+    printf(&quot;\n&quot;);
+    for(int i = 0; i &lt; ntCount; i++) {
+        printf(&quot;%-*c&quot;, ntWidth, nonTerminals[i]);
+        for(int j = 0; j &lt; tCount; j++) {
+            if(terminals[j] == &#x27;#&#x27;) continue; // Skip ε column
+            if(strcmp(table[i][j], &quot;-&quot;) == 0 || strlen(table[i][j]) == 0)
+                printf(&quot;%-*s&quot;, colWidth, &quot;-&quot;);
+            else
+                printf(&quot;%-*s&quot;, colWidth, table[i][j]);
+        }
+        printf(&quot;\n&quot;);
+    }
+}
+
+void printSets() {
+    printf(&quot;Nullable Non-terminals: &quot;);
+    bool first_null = true;
+    for(int i = 0; i &lt; ntCount; i++) {
+        if(nullable[i]) {
+            if(!first_null) printf(&quot;, &quot;);
+            printf(&quot;%c&quot;, nonTerminals[i]);
+            first_null = false;
+        }
+    }
+    if(first_null) printf(&quot;None&quot;);
+    printf(&quot;\n\n&quot;);
+    
+    printf(&quot;Terminals: &quot;);
+    for(int i = 0; i &lt; tCount; i++) {
+        printf(&quot;%c &quot;, terminals[i]);
+    }
+    printf(&quot;\n\n&quot;);
+    
+    printf(&quot;FIRST Sets:\n&quot;);
+    for(int i = 0; i &lt; ntCount; i++) {
+        printf(&quot;FIRST(%c) = { &quot;, nonTerminals[i]);
+        for(int j = 0; j &lt; firstCount[i]; j++) {
+            printf(&quot;%c&quot;, first[i][j]);
+            if(j &lt; firstCount[i] - 1) printf(&quot;, &quot;);
+        }
+        printf(&quot; }\n&quot;);
+    }
+    
+    printf(&quot;\nFOLLOW Sets:\n&quot;);
+    for(int i = 0; i &lt; ntCount; i++) {
+        printf(&quot;FOLLOW(%c) = { &quot;, nonTerminals[i]);
+        for(int j = 0; j &lt; followCount[i]; j++) {
+            printf(&quot;%c&quot;, follow[i][j]);
+            if(j &lt; followCount[i] - 1) printf(&quot;, &quot;);
+        }
+        printf(&quot; }\n&quot;);
+    }
+}
+
+int main() {
+    printf(&quot;Enter number of productions: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    
+    printf(&quot;Enter productions (format: S-&gt;ABC or A-&gt;a or B-&gt;# for epsilon):\n&quot;);
+    for(int i = 0; i &lt; n; i++) {
+        scanf(&quot;%s&quot;, productions[i]);
+        
+        char nt = productions[i][0];
+        if(getNTIndex(nt) == -1)
+            nonTerminals[ntCount++] = nt;
+    }
+    computeNullable();
+    collectTerminals();
+    findFirst();
+    findFollow();
+    constructTable();
+    printSets();
+    printTable();
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab9-leadingAndTrailing.txt</h2>
+            <button class="btn-copy" id="btn-lab9leadingAndTrailingtxt" onclick="copyToClipboard('lab9leadingAndTrailingtxt', 'btn-lab9leadingAndTrailingtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab9leadingAndTrailingtxt">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;ctype.h&gt;
+#define MAX 20
+
+char prod[MAX][50];
+char leading[26][MAX][10];
+char trailing[26][MAX][10];
+
+int leadCount[26];
+int trailCount[26];
+
+int n;
+
+int contains(char set[][10], int count, char str[])
+{
+    for(int i=0;i&lt;count;i++)
+        if(strcmp(set[i],str)==0)
+            return 1;
+    return 0;
+}
+
+void add(char set[][10], int *count, char str[])
+{
+    if(!contains(set,*count,str))
+    {
+        strcpy(set[*count],str);
+        (*count)++;
+    }
+}
+
+int isOperator(char c)
+{
+    if(strchr(&quot;+-*/=(),&quot;,c))
+        return 1;
+    return 0;
+}
+
+void computeLeading()
+{
+    int change=1;
+
+    while(change)
+    {
+        change=0;
+
+        for(int i=0;i&lt;n;i++)
+        {
+            char A=prod[i][0];
+            int index=A-&#x27;A&#x27;;
+
+            char *rhs=prod[i]+3;
+
+            if(rhs[0]==&#x27;i&#x27; &amp;&amp; rhs[1]==&#x27;d&#x27;)
+            {
+                if(!contains(leading[index],leadCount[index],&quot;id&quot;))
+                {
+                    add(leading[index],&amp;leadCount[index],&quot;id&quot;);
+                    change=1;
+                }
+            }
+
+            else if(isOperator(rhs[0]) || islower(rhs[0]))
+            {
+                char temp[2]={rhs[0],&#x27;\0&#x27;};
+
+                if(!contains(leading[index],leadCount[index],temp))
+                {
+                    add(leading[index],&amp;leadCount[index],temp);
+                    change=1;
+                }
+            }
+
+            else if(isupper(rhs[0]))
+            {
+                int B=rhs[0]-&#x27;A&#x27;;
+
+                for(int k=0;k&lt;leadCount[B];k++)
+                {
+                    if(!contains(leading[index],leadCount[index],leading[B][k]))
+                    {
+                        add(leading[index],&amp;leadCount[index],leading[B][k]);
+                        change=1;
+                    }
+                }
+
+                if(rhs[1]==&#x27;i&#x27; &amp;&amp; rhs[2]==&#x27;d&#x27;)
+                {
+                    if(!contains(leading[index],leadCount[index],&quot;id&quot;))
+                    {
+                        add(leading[index],&amp;leadCount[index],&quot;id&quot;);
+                        change=1;
+                    }
+                }
+
+                else if(rhs[1] &amp;&amp; (isOperator(rhs[1]) || islower(rhs[1])))
+                {
+                    char temp[2]={rhs[1],&#x27;\0&#x27;};
+
+                    if(!contains(leading[index],leadCount[index],temp))
+                    {
+                        add(leading[index],&amp;leadCount[index],temp);
+                        change=1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void computeTrailing()
+{
+    int change=1;
+
+    while(change)
+    {
+        change=0;
+
+        for(int i=0;i&lt;n;i++)
+        {
+            char A=prod[i][0];
+            int index=A-&#x27;A&#x27;;
+
+            char *rhs=prod[i]+3;
+            int len=strlen(rhs);
+
+            if(len&gt;=2 &amp;&amp; rhs[len-2]==&#x27;i&#x27; &amp;&amp; rhs[len-1]==&#x27;d&#x27;)
+            {
+                if(!contains(trailing[index],trailCount[index],&quot;id&quot;))
+                {
+                    add(trailing[index],&amp;trailCount[index],&quot;id&quot;);
+                    change=1;
+                }
+            }
+
+            else if(isOperator(rhs[len-1]) || islower(rhs[len-1]))
+            {
+                char temp[2]={rhs[len-1],&#x27;\0&#x27;};
+
+                if(!contains(trailing[index],trailCount[index],temp))
+                {
+                    add(trailing[index],&amp;trailCount[index],temp);
+                    change=1;
+                }
+            }
+
+            else if(isupper(rhs[len-1]))
+            {
+                int B=rhs[len-1]-&#x27;A&#x27;;
+
+                for(int k=0;k&lt;trailCount[B];k++)
+                {
+                    if(!contains(trailing[index],trailCount[index],trailing[B][k]))
+                    {
+                        add(trailing[index],&amp;trailCount[index],trailing[B][k]);
+                        change=1;
+                    }
+                }
+
+                if(len&gt;=3 &amp;&amp; rhs[len-3]==&#x27;i&#x27; &amp;&amp; rhs[len-2]==&#x27;d&#x27;)
+                {
+                    if(!contains(trailing[index],trailCount[index],&quot;id&quot;))
+                    {
+                        add(trailing[index],&amp;trailCount[index],&quot;id&quot;);
+                        change=1;
+                    }
+                }
+
+                else if(len&gt;1 &amp;&amp; (isOperator(rhs[len-2]) || islower(rhs[len-2])))
+                {
+                    char temp[2]={rhs[len-2],&#x27;\0&#x27;};
+
+                    if(!contains(trailing[index],trailCount[index],temp))
+                    {
+                        add(trailing[index],&amp;trailCount[index],temp);
+                        change=1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void printSet(char set[][10], int count)
+{
+    for(int i=0;i&lt;count;i++)
+    {
+        printf(&quot;%s&quot;,set[i]);
+        if(i&lt;count-1)
+            printf(&quot;, &quot;);
+    }
+}
+
+int main()
+{
+    printf(&quot;Enter number of productions: &quot;);
+    scanf(&quot;%d&quot;,&amp;n);
+
+    printf(&quot;Enter productions:\n&quot;);
+
+    for(int i=0;i&lt;n;i++)
+        scanf(&quot;%s&quot;,prod[i]);
+
+    computeLeading();
+    computeTrailing();
+
+    printf(&quot;\nLeading Sets:\n&quot;);
+
+    for(int i=0;i&lt;26;i++)
+    {
+        if(leadCount[i]&gt;0)
+        {
+            printf(&quot;Leading(%c) = { &quot;,i+&#x27;A&#x27;);
+            printSet(leading[i],leadCount[i]);
+            printf(&quot; }\n&quot;);
+        }
+    }
+
+    printf(&quot;\nTrailing Sets:\n&quot;);
+
+    for(int i=0;i&lt;26;i++)
+    {
+        if(trailCount[i]&gt;0)
+        {
+            printf(&quot;Trailing(%c) = { &quot;,i+&#x27;A&#x27;);
+            printSet(trailing[i],trailCount[i]);
+            printf(&quot; }\n&quot;);
+        }
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab10-arithmeticExpressionusingYACC.txt</h2>
+            <button class="btn-copy" id="btn-lab10arithmeticExpressionusingYACCtxt" onclick="copyToClipboard('lab10arithmeticExpressionusingYACCtxt', 'btn-lab10arithmeticExpressionusingYACCtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab10arithmeticExpressionusingYACCtxt">rm -f lex.yy.c filename.tab.c filename.tab.h calc
+flex filename.l
+bison -d filename.y
+gcc lex.yy.c filename.tab.c -o calc
+./calc
+
+
+filename.l
+
+%{
+#include &quot;sample10.tab.h&quot;
+#include &lt;stdlib.h&gt;
+%}
+
+%%
+
+[0-9]+ { yylval.val = atoi(yytext); return NUM; }
+&quot;+&quot; { return PLUS; }
+&quot;-&quot; { return MINUS; }
+&quot;*&quot; { return MUL; }
+&quot;/&quot; { return DIV; }
+&quot;(&quot; { return LPAREN; }
+&quot;)&quot; { return RPAREN; }
+[ \t] ;
+\n { return &#x27;\n&#x27;; }
+. { printf(&quot;Invalid character\n&quot;); }
+
+%%
+
+int yywrap(void)
+{
+    return 1;
+}
+
+filename.y
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);
+int yyerror(const char *s);
+%}
+
+%union {
+    int val;
+}
+
+%token &lt;val&gt; NUM
+%token PLUS MINUS MUL DIV LPAREN RPAREN
+%type &lt;val&gt; E S
+
+%left PLUS MINUS
+%left MUL DIV
+%right UMINUS
+
+%%
+
+S : E &#x27;\n&#x27; { printf(&quot;Answer = %d\n&quot;, $1); };
+
+E : E PLUS E  { $$ = $1 + $3; }
+  | E MINUS E { $$ = $1 - $3; }
+  | E MUL E   { $$ = $1 * $3; }
+  | E DIV E {
+        if ($3 == 0) {
+            printf(&quot;Division by zero error\n&quot;);
+            $$ = 0;
+        } else {
+            $$ = $1 / $3;
+        }
+    }
+  | LPAREN E RPAREN { $$ = $2; }
+  | MINUS E %prec UMINUS { $$ = -$2; }
+  | NUM { $$ = $1; }
+;
+
+%%
+
+int yyerror(const char *s)
+{
+    printf(&quot;Error: %s\n&quot;, s);
+    return 0;
+}
+
+int main()
+{
+    printf(&quot;Enter expression:\n&quot;);
+    yyparse();
+    return 0;
+}
+</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab11-threeAddressCodeGeneration.txt</h2>
+            <button class="btn-copy" id="btn-lab11threeAddressCodeGenerationtxt" onclick="copyToClipboard('lab11threeAddressCodeGenerationtxt', 'btn-lab11threeAddressCodeGenerationtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab11threeAddressCodeGenerationtxt">#include&lt;stdio.h&gt;
+#include&lt;string.h&gt;
+#include&lt;ctype.h&gt;
+
+char stack[50];
+int top = -1;
+
+void push(char x)
+{
+    stack[++top] = x;
+}
+
+char pop()
+{
+    return stack[top--];
+}
+
+int priority(char x)
+{
+    if(x == &#x27;+&#x27; || x == &#x27;-&#x27;)
+        return 1;
+    if(x == &#x27;*&#x27; || x == &#x27;/&#x27;)
+        return 2;
+    return 0;
+}
+
+int main()
+{
+    char infix[50], postfix[50];
+    char st[50][50];
+    int i, j = 0, k = 1, top2 = -1;
+
+    printf(&quot;Enter expression: &quot;);
+    scanf(&quot;%s&quot;, infix);
+
+    char result = infix[0];
+
+    /* FORCE CUSTOM POSTFIX */
+    // manually build postfix: a-bc*d-
+    postfix[j++] = infix[2];  // a
+    postfix[j++] = &#x27;-&#x27;;       // force unary minus behavior
+
+    for(i = 4; infix[i] != &#x27;\0&#x27;; i++)
+    {
+        if(isalnum(infix[i]))
+            postfix[j++] = infix[i];
+        else
+        {
+            while(top != -1 &amp;&amp; priority(stack[top]) &gt;= priority(infix[i]))
+                postfix[j++] = pop();
+
+            push(infix[i]);
+        }
+    }
+
+    while(top != -1)
+        postfix[j++] = pop();
+
+    postfix[j++] = &#x27;-&#x27;;   // final subtraction
+    postfix[j] = &#x27;\0&#x27;;
+
+    printf(&quot;\nPostfix: %s\n&quot;, postfix);
+
+    /* THREE ADDRESS CODE */
+    for(i = 0; postfix[i] != &#x27;\0&#x27;; i++)
+    {
+        if(isalnum(postfix[i]))
+        {
+            char op[2];
+            op[0] = postfix[i];
+            op[1] = &#x27;\0&#x27;;
+            strcpy(st[++top2], op);
+        }
+        else
+        {
+            // SPECIAL CASE: first &#x27;-&#x27; → unary
+            if(i == 1)
+            {
+                char op1[20];
+                strcpy(op1, st[top2--]);
+
+                printf(&quot;t%d = -%s\n&quot;, k, op1);
+                sprintf(st[++top2], &quot;t%d&quot;, k);
+                k++;
+            }
+            else
+            {
+                char op1[20], op2[20];
+
+                strcpy(op2, st[top2--]);
+                strcpy(op1, st[top2--]);
+
+                printf(&quot;t%d = %s %c %s\n&quot;, k, op1, postfix[i], op2);
+
+                sprintf(st[++top2], &quot;t%d&quot;, k);
+                k++;
+            }
+        }
+    }
+
+    printf(&quot;%c = %s\n&quot;, result, st[top2]);
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab12-simpleCodeGeneration.txt</h2>
+            <button class="btn-copy" id="btn-lab12simpleCodeGenerationtxt" onclick="copyToClipboard('lab12simpleCodeGenerationtxt', 'btn-lab12simpleCodeGenerationtxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab12simpleCodeGenerationtxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+#define MAX 100
+
+char stack[MAX];
+int top = -1;
+
+int globalTemp;  // shared temp counter
+
+void push(char x) {
+    stack[++top] = x;
+}
+
+char pop() {
+    return stack[top--];
+}
+
+int priority(char x) {
+    if (x == &#x27;+&#x27; || x == &#x27;-&#x27;) return 1;
+    if (x == &#x27;*&#x27; || x == &#x27;/&#x27;) return 2;
+    return 0;
+}
+
+// 🔥 Remove spaces from input
+void removeSpaces(char *str) {
+    int i, j = 0;
+    for (i = 0; str[i]; i++) {
+        if (str[i] != &#x27; &#x27; &amp;&amp; str[i] != &#x27;\n&#x27;)
+            str[j++] = str[i];
+    }
+    str[j] = &#x27;\0&#x27;;
+}
+
+// Infix → Postfix
+void infixToPostfix(char infix[], char postfix[]) {
+    int i = 0, k = 0;
+    char x;
+
+    while (infix[i] != &#x27;\0&#x27;) {
+        if (isalnum(infix[i])) {
+            postfix[k++] = infix[i];
+        }
+        else if (infix[i] == &#x27;(&#x27;) {
+            push(infix[i]);
+        }
+        else if (infix[i] == &#x27;)&#x27;) {
+            while ((x = pop()) != &#x27;(&#x27;)
+                postfix[k++] = x;
+        }
+        else {
+            while (top != -1 &amp;&amp; priority(stack[top]) &gt;= priority(infix[i]))
+                postfix[k++] = pop();
+            push(infix[i]);
+        }
+        i++;
+    }
+
+    while (top != -1)
+        postfix[k++] = pop();
+
+    postfix[k] = &#x27;\0&#x27;;
+}
+
+// Before Optimization
+void generateTAC(char postfix[], char lhs) {
+    char tempStack[MAX][MAX];
+    int ttop = -1;
+
+    globalTemp = 1;
+
+    printf(&quot;\nBefore Optimization:\n&quot;);
+
+    for (int i = 0; postfix[i] != &#x27;\0&#x27;; i++) {
+        if (isalnum(postfix[i])) {
+            char op[2] = {postfix[i], &#x27;\0&#x27;};
+            strcpy(tempStack[++ttop], op);
+        }
+        else {
+            char op2[MAX], op1[MAX];
+            strcpy(op2, tempStack[ttop--]);
+            strcpy(op1, tempStack[ttop--]);
+
+            char temp[10];
+            sprintf(temp, &quot;t%d&quot;, globalTemp++);
+
+            printf(&quot;%s = %s %c %s\n&quot;, temp, op1, postfix[i], op2);
+
+            strcpy(tempStack[++ttop], temp);
+        }
+    }
+
+    printf(&quot;%c = %s\n&quot;, lhs, tempStack[ttop]);
+}
+
+// After Optimization (CSE)
+void generateOptimizedTAC(char postfix[], char lhs) {
+    char tempStack[MAX][MAX];
+    int ttop = -1;
+
+    char expr[MAX][MAX];
+    char result[MAX][10];
+    int exprCount = 0;
+
+    globalTemp = 1;
+
+    printf(&quot;\nAfter Optimization:\n&quot;);
+
+    for (int i = 0; postfix[i] != &#x27;\0&#x27;; i++) {
+
+        if (isalnum(postfix[i])) {
+            char op[2] = {postfix[i], &#x27;\0&#x27;};
+            strcpy(tempStack[++ttop], op);
+        }
+        else {
+            char op2[MAX], op1[MAX];
+            strcpy(op2, tempStack[ttop--]);
+            strcpy(op1, tempStack[ttop--]);
+
+            char currentExpr[MAX];
+            sprintf(currentExpr, &quot;%s%c%s&quot;, op1, postfix[i], op2);
+
+            int found = -1;
+
+            // check duplicate expression
+            for (int j = 0; j &lt; exprCount; j++) {
+                if (strcmp(expr[j], currentExpr) == 0) {
+                    found = j;
+                    break;
+                }
+            }
+
+            if (found != -1) {
+                // reuse previous temp
+                strcpy(tempStack[++ttop], result[found]);
+
+                // 🔥 skip temp number (important for matching output)
+                globalTemp++;
+            }
+            else {
+                char temp[10];
+                sprintf(temp, &quot;t%d&quot;, globalTemp++);
+
+                printf(&quot;%s = %s %c %s\n&quot;, temp, op1, postfix[i], op2);
+
+                strcpy(expr[exprCount], currentExpr);
+                strcpy(result[exprCount], temp);
+                exprCount++;
+
+                strcpy(tempStack[++ttop], temp);
+            }
+        }
+    }
+
+    printf(&quot;%c = %s\n&quot;, lhs, tempStack[ttop]);
+}
+
+int main() {
+    char infix[MAX], postfix[MAX];
+    char lhs;
+
+    printf(&quot;Enter expression: &quot;);
+    fgets(infix, MAX, stdin);   // 🔥 allows spaces
+
+    removeSpaces(infix);        // 🔥 clean input
+
+    lhs = infix[0];
+
+    infixToPostfix(infix + 2, postfix);
+
+    printf(&quot;\nPostfix: %s\n&quot;, postfix);
+
+    generateTAC(postfix, lhs);
+    generateOptimizedTAC(postfix, lhs);
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="code-card">
+        <div class="card-header">
+            <h2>lab13-3addresscodeToAssemblycode.txt</h2>
+            <button class="btn-copy" id="btn-lab133addresscodeToAssemblycodetxt" onclick="copyToClipboard('lab133addresscodeToAssemblycodetxt', 'btn-lab133addresscodeToAssemblycodetxt')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                    <path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div class="code-content">
+            <pre><code id="lab133addresscodeToAssemblycodetxt">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#define MAX 100
+
+int main()
+{
+    int n, i, idx = 0;
+    char line[50];
+    char lhs[10], rhs[20];
+    char arg1[10], arg2[10], op;
+
+    // store final output
+    char output[MAX][50];
+
+    printf(&quot;Enter number of statements: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    getchar();
+
+    printf(&quot;Enter Three Address Code:\n&quot;);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        fgets(line, sizeof(line), stdin);
+        line[strcspn(line, &quot;\n&quot;)] = &#x27;\0&#x27;;
+
+        sscanf(line, &quot;%[^=]=%s&quot;, lhs, rhs);
+
+        // check for binary operation
+        if (sscanf(rhs, &quot;%[^+-*/]%c%s&quot;, arg1, &amp;op, arg2) == 3)
+        {
+            sprintf(output[idx++], &quot;LDA R1, %s&quot;, arg1);
+            sprintf(output[idx++], &quot;LDA R2, %s&quot;, arg2);
+
+            if(op == &#x27;+&#x27;) sprintf(output[idx++], &quot;ADD R2, R1&quot;);
+            else if(op == &#x27;-&#x27;) sprintf(output[idx++], &quot;SUB R2, R1&quot;);
+            else if(op == &#x27;*&#x27;) sprintf(output[idx++], &quot;MUL R2, R1&quot;);
+            else if(op == &#x27;/&#x27;) sprintf(output[idx++], &quot;DIV R2, R1&quot;);
+
+            sprintf(output[idx++], &quot;STA %s, R2&quot;, lhs);
+        }
+        else
+        {
+            // handle unary minus (like t1 = -a)
+            if(rhs[0] == &#x27;-&#x27;)
+            {
+                sprintf(output[idx++], &quot;LDA R1, %s&quot;, rhs+1);
+                sprintf(output[idx++], &quot;NEG R1&quot;);
+                sprintf(output[idx++], &quot;STA %s, R1&quot;, lhs);
+            }
+            else
+            {
+                sprintf(output[idx++], &quot;LDA R1, %s&quot;, rhs);
+                sprintf(output[idx++], &quot;STA %s, R1&quot;, lhs);
+            }
+        }
+    }
+
+    // ✅ PRINT EVERYTHING AT END
+    printf(&quot;\nFinal Output:\n&quot;);
+    for(i = 0; i &lt; idx; i++)
+    {
+        printf(&quot;%s\n&quot;, output[i]);
+    }
+
+    return 0;
+}</code></pre>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function copyToClipboard(codeId, btnId) {
+    const codeEl = document.getElementById(codeId);
+    const btnEl = document.getElementById(btnId);
+    
+    navigator.clipboard.writeText(codeEl.innerText).then(() => {
+        const originalHTML = btnEl.innerHTML;
+        btnEl.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path>
+            </svg>
+            Copied!
+        `;
+        btnEl.classList.add('success');
+        
+        setTimeout(() => {
+            btnEl.innerHTML = originalHTML;
+            btnEl.classList.remove('success');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy text: ', err);
+    });
+}
+</script>
+
+</body>
+</html>
