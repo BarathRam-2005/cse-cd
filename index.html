@@ -1163,150 +1163,74 @@ int main(int argc, char *argv[]) {
         </div>
         <div class="code-content">
             <pre><code id="lab7firstAndFollowtxt">#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
 #include &lt;ctype.h&gt;
-#define MAX 50
+#include &lt;string.h&gt;
+
+#define MAX 10
+
+char production[MAX][MAX];
+char first[MAX][MAX], follow[MAX][MAX];
 int n;
-char productions[MAX][MAX];
-char first[26][MAX];
-char follow[26][MAX];
-int firstCount[26];
-int followCount[26];
-void add(char set[], int *count, char c) {
-    for(int i = 0; i &lt; *count; i++)
-        if(set[i] == c)
+
+// Function to add to set
+void addToSet(char *set, char val) {
+    for (int i = 0; set[i]; i++)
+        if (set[i] == val)
             return;
-    set[(*count)++] = c;
+
+    int len = strlen(set);
+    set[len] = val;
+    set[len + 1] = &#x27;\0&#x27;;
 }
 
-void computeFirst(char);
-
-void firstString(char *str, int pos, int index) {
-
-    if(str[pos] == &#x27;\0&#x27;) {
-        add(first[index], &amp;firstCount[index], &#x27;#&#x27;);
+// FIRST function
+void findFirst(char c, int index) {
+    if (!isupper(c)) {
+        addToSet(first[index], c);
         return;
     }
 
-    if(!isupper(str[pos])) {
-        add(first[index], &amp;firstCount[index], str[pos]);
-        return;
-    }
-
-    int next = str[pos] - &#x27;A&#x27;;
-    computeFirst(str[pos]);
-
-    int epsilon = 0;
-
-    for(int i = 0; i &lt; firstCount[next]; i++) {
-        if(first[next][i] != &#x27;#&#x27;)
-            add(first[index], &amp;firstCount[index], first[next][i]);
-        else
-            epsilon = 1;
-    }
-
-    if(epsilon)
-        firstString(str, pos+1, index);
-}
-
-void computeFirst(char symbol) {
-
-    int index = symbol - &#x27;A&#x27;;
-
-    if(firstCount[index] != 0)
-        return;
-
-    for(int i = 0; i &lt; n; i++) {
-        if(productions[i][0] == symbol) {
-
-            if(productions[i][3] == &#x27;#&#x27;)
-                add(first[index], &amp;firstCount[index], &#x27;#&#x27;);
-            else
-                firstString(productions[i], 3, index);
+    for (int i = 0; i &lt; n; i++) {
+        if (production[i][0] == c) {
+            if (production[i][2] == &#x27;$&#x27;) {
+                addToSet(first[index], &#x27;$&#x27;);
+            }
+            else {
+                findFirst(production[i][2], index);
+            }
         }
     }
 }
 
-void computeFollow() {
+// FOLLOW function
+void findFollow(char c, int index) {
+    if (production[0][0] == c)
+        addToSet(follow[index], &#x27;$&#x27;);
 
-    // Rule 1
-    add(follow[productions[0][0]-&#x27;A&#x27;],
-        &amp;followCount[productions[0][0]-&#x27;A&#x27;], &#x27;$&#x27;);
-
-    int changed = 1;
-
-    while(changed) {
-
-        changed = 0;
-
-        for(int i = 0; i &lt; n; i++) {
-
-            char A = productions[i][0];
-            int Aindex = A - &#x27;A&#x27;;
-
-            for(int j = 3; productions[i][j] != &#x27;\0&#x27;; j++) {
-
-                if(isupper(productions[i][j])) {
-
-                    int Bindex = productions[i][j] - &#x27;A&#x27;;
-                    int k = j + 1;
-                    int epsilonAll = 1;
-
-                    // Check β part
-                    while(productions[i][k] != &#x27;\0&#x27;) {
-
-                        epsilonAll = 0;
-
-                        if(!isupper(productions[i][k])) {
-
-                            int before = followCount[Bindex];
-                            add(follow[Bindex], &amp;followCount[Bindex],
-                                productions[i][k]);
-
-                            if(before != followCount[Bindex])
-                                changed = 1;
-
-                            epsilonAll = 0;
-                            break;
-                        }
-
-                        int next = productions[i][k] - &#x27;A&#x27;;
-                        int epsilon = 0;
-
-                        for(int x = 0; x &lt; firstCount[next]; x++) {
-
-                            if(first[next][x] != &#x27;#&#x27;) {
-                                int before = followCount[Bindex];
-                                add(follow[Bindex], &amp;followCount[Bindex],
-                                    first[next][x]);
-
-                                if(before != followCount[Bindex])
-                                    changed = 1;
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 2; j &lt; strlen(production[i]); j++) {
+            if (production[i][j] == c) {
+                if (production[i][j + 1] != &#x27;\0&#x27;) {
+                    if (!isupper(production[i][j + 1])) {
+                        addToSet(follow[index], production[i][j + 1]);
+                    } else {
+                        int k;
+                        for (k = 0; k &lt; n; k++) {
+                            if (production[k][0] == production[i][j + 1]) {
+                                for (int l = 0; first[k][l]; l++) {
+                                    if (first[k][l] != &#x27;$&#x27;)
+                                        addToSet(follow[index], first[k][l]);
+                                }
                             }
-                            else
-                                epsilon = 1;
                         }
-
-                        if(!epsilon) {
-                            epsilonAll = 0;
-                            break;
-                        }
-
-                        epsilonAll = 1;
-                        k++;
                     }
-
-                    // Rule 3 &amp; 4
-                    if(epsilonAll || productions[i][j+1] == &#x27;\0&#x27;) {
-
-                        for(int x = 0; x &lt; followCount[Aindex]; x++) {
-
-                            int before = followCount[Bindex];
-                            add(follow[Bindex], &amp;followCount[Bindex],
-                                follow[Aindex][x]);
-
-                            if(before != followCount[Bindex])
-                                changed = 1;
+                } else if (production[i][0] != c) {
+                    int k;
+                    for (k = 0; k &lt; n; k++) {
+                        if (production[k][0] == production[i][0]) {
+                            for (int l = 0; follow[k][l]; l++) {
+                                addToSet(follow[index], follow[k][l]);
+                            }
                         }
                     }
                 }
@@ -1316,37 +1240,46 @@ void computeFollow() {
 }
 
 int main() {
-
     printf(&quot;Enter number of productions: &quot;);
     scanf(&quot;%d&quot;, &amp;n);
 
-    printf(&quot;Enter productions (Example: E-&gt;TR):\n&quot;);
-    for(int i = 0; i &lt; n; i++)
-        scanf(&quot;%s&quot;, productions[i]);
-
-    for(int i = 0; i &lt; n; i++)
-        computeFirst(productions[i][0]);
-
-    computeFollow();
-
-    printf(&quot;\nFIRST Sets:\n&quot;);
-    for(int i = 0; i &lt; 26; i++) {
-        if(firstCount[i] &gt; 0) {
-            printf(&quot;FIRST(%c) = { &quot;, i + &#x27;A&#x27;);
-            for(int j = 0; j &lt; firstCount[i]; j++)
-                printf(&quot;%c &quot;, first[i][j]);
-            printf(&quot;}\n&quot;);
-        }
+    printf(&quot;Enter productions (e.g., E=TR):\n&quot;);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%s&quot;, production[i]);
     }
 
-    printf(&quot;\nFOLLOW Sets:\n&quot;);
-    for(int i = 0; i &lt; 26; i++) {
-        if(followCount[i] &gt; 0) {
-            printf(&quot;FOLLOW(%c) = { &quot;, i + &#x27;A&#x27;);
-            for(int j = 0; j &lt; followCount[i]; j++)
-                printf(&quot;%c &quot;, follow[i][j]);
-            printf(&quot;}\n&quot;);
-        }
+    // Initialize sets
+    for (int i = 0; i &lt; n; i++) {
+        first[i][0] = &#x27;\0&#x27;;
+        follow[i][0] = &#x27;\0&#x27;;
+    }
+
+    // FIRST calculation
+    for (int i = 0; i &lt; n; i++) {
+        findFirst(production[i][0], i);
+    }
+
+    // FOLLOW calculation
+    for (int i = 0; i &lt; n; i++) {
+        findFollow(production[i][0], i);
+    }
+
+    // Output FIRST
+    printf(&quot;\nFIRST sets:\n&quot;);
+    for (int i = 0; i &lt; n; i++) {
+        printf(&quot;FIRST(%c) = { &quot;, production[i][0]);
+        for (int j = 0; first[i][j]; j++)
+            printf(&quot;%c &quot;, first[i][j]);
+        printf(&quot;}\n&quot;);
+    }
+
+    // Output FOLLOW
+    printf(&quot;\nFOLLOW sets:\n&quot;);
+    for (int i = 0; i &lt; n; i++) {
+        printf(&quot;FOLLOW(%c) = { &quot;, production[i][0]);
+        for (int j = 0; follow[i][j]; j++)
+            printf(&quot;%c &quot;, follow[i][j]);
+        printf(&quot;}\n&quot;);
     }
 
     return 0;
